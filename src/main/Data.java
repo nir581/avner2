@@ -9,8 +9,7 @@ public class Data
 {
 	private static Data INSTANCE = new Data();
 
-	private Data()
-	{}
+	private Data() {}
 
 	public static Data getInstance() {
 		return INSTANCE;
@@ -18,13 +17,7 @@ public class Data
 
 	public Map<Integer, Map<Integer, TaxRecord>> getTablesMap()
 	{
-		// TAV 16
-		TaxRecord t_16_1 = new TaxRecord(62640, 0.1);
-		TaxRecord t_16_2 = new TaxRecord(62640, 0.1);
-		TaxRecord t_16_3 = new TaxRecord(62640, 0.1);
-		List<TaxRecord> t_2016 = Arrays.asList(t_16_1, t_16_2, t_16_3);
-
-		Map<Integer, TaxRecord> map_2016 = new LinkedHashMap<>()
+		final Map<Integer, TaxRecord> map_2016 = new LinkedHashMap<>()
 		{{
 			put(1, new TaxRecord(62640, 0.1));
 			put(2, new TaxRecord(107040, 0.14));
@@ -34,7 +27,7 @@ public class Data
 			put(6, new TaxRecord(496921, 0.48));
 		}};
 
-		Map<Integer, TaxRecord> map_2017 = new LinkedHashMap<>()
+		final Map<Integer, TaxRecord> map_2017 = new LinkedHashMap<>()
 		{{
 			put(1, new TaxRecord(74640, 0.1));
 			put(2, new TaxRecord(107040, 0.14));
@@ -44,7 +37,7 @@ public class Data
 			put(6, new TaxRecord(496921, 0.47));
 		}};
 
-		Map<Integer, TaxRecord> map_2018 = new LinkedHashMap<>()
+		final Map<Integer, TaxRecord> map_2018 = new LinkedHashMap<>()
 		{{
 			put(1, new TaxRecord(74880, 0.1));
 			put(2, new TaxRecord(107400, 0.14));
@@ -54,7 +47,7 @@ public class Data
 			put(6, new TaxRecord(498361, 0.47));
 		}};
 
-		Map<Integer, TaxRecord> map_2019 = new LinkedHashMap<>()
+		final Map<Integer, TaxRecord> map_2019 = new LinkedHashMap<>()
 		{{
 			put(1, new TaxRecord(75720, 0.1));
 			put(2, new TaxRecord(108600, 0.14));
@@ -64,7 +57,7 @@ public class Data
 			put(6, new TaxRecord(504361, 0.47));
 		}};
 
-		Map<Integer, TaxRecord> map_2020 = new LinkedHashMap<>()
+		final Map<Integer, TaxRecord> map_2020 = new LinkedHashMap<>()
 		{{
 			put(1, new TaxRecord(75960, 0.1));
 			put(2, new TaxRecord(108960, 0.14));
@@ -74,7 +67,7 @@ public class Data
 			put(6, new TaxRecord(505921, 0.47));
 		}};
 
-		Map<Integer, Map<Integer, TaxRecord>> tableOfMaps = new LinkedHashMap<>()
+		return new LinkedHashMap<>()
 		{{
 			put(2016, map_2016);
 			put(2017, map_2017);
@@ -82,7 +75,5 @@ public class Data
 			put(2019, map_2019);
 			put(2020, map_2020);
 		}};
-
-		return tableOfMaps;
 	}
 }

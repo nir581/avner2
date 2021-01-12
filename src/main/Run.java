@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 // last updated in 02/01/2020
 public class Run
 {
+	public static final double SHEVA_20 = 0.2;
+	public static final double SHEVA_25 = 0.25;
 	// TODO: ????????????????????????????????????????
 	// Unify all prints
 	//Print total sum of sum and total sum of max and SUM MAS / SUM
@@ -71,7 +73,6 @@ public class Run
 			shevah20 = 1;
 			shevah25 = 146525;
 			yearToYish = Map.of(2020,60000, 2017,88911, 2018,91806, 2019,86498);
-			//yearToYish = Map.of(2019,259641);
 		}
 
 		// 1. Collecting data from the user
@@ -121,7 +122,8 @@ public class Run
 			final double tax6 = tav.get(6).getTax();
 			final int tikra6 = shevshuli;
 			final double sMas6 = tikra6 * tax6;
-			RunHelper.print(userData, Collections.singletonList(new RoutineOutput(-1, sMas6, -1, tikra6, tax6, 6)));
+			final List<RoutineOutput> outputList = Collections.singletonList(new RoutineOutput(-1, sMas6, -1, tikra6, tax6, 6));
+			RunHelper.print(userData, outputList);
 		}
 		else {
 			int index;
@@ -131,12 +133,12 @@ public class Run
 			else {									 // regular case: age >= 60
 				index = getSelectedMaxIndex(yish, tav, 1);
 			}
-			Map<Integer, RoutineOutput> indexToOutputMap = runIterations(index, yish, shevshuli, tav);
-			RunHelper.print(userData, new ArrayList<>(indexToOutputMap.values()));
+			final List<RoutineOutput> outputList = runIterations(index, yish, shevshuli, tav);
+			RunHelper.print(userData, outputList);
 			if (age < 60) {
-				final double sh20Total = sh20 * 0.2;
+				final double sh20Total = sh20 * SHEVA_20;
 				System.out.println("TOTALMASSHANASh20: " + RunHelper.round(sh20Total));
-				final double sh25Total = sh25 * 0.25;
+				final double sh25Total = sh25 * SHEVA_25;
 				System.out.println("TOTALMASSHANASh25: " + RunHelper.round(sh25Total));
 			}
 			else {
@@ -147,7 +149,7 @@ public class Run
 		}
 	}
 
-	private Map<Integer, RoutineOutput> runIterations(int index, int yish, int shevshuli, Map<Integer, TaxRecord> tav)
+	private List<RoutineOutput> runIterations(int index, int yish, int shevshuli, Map<Integer, TaxRecord> tav)
 	{
 		int maxIteration = 5;
 		Map<Integer, RoutineOutput> indexToOutputMap = new HashMap<>();
@@ -182,7 +184,7 @@ public class Run
 				indexToOutputMap.put(6, routineOutput6);
 			}
 		}
-		return indexToOutputMap;
+		return new ArrayList<>(indexToOutputMap.values());
 	}
 
 	private RoutineOutput routine(RoutineInput input)
@@ -269,7 +271,7 @@ public class Run
 					tikra12 = tav.get(2).getMax() - tav.get(1).getMax();
 					smas12 = tikra12 * tav.get(2).getTax();
 					tikra13 = sh20 - (tikra11 + tikra12);
-					smas13 = tikra13 * 0.2; // CHANGED FROM tav.get(3).getTax() to 0.2
+					smas13 = tikra13 * SHEVA_20; // CHANGED FROM tav.get(3).getTax() to 0.2
 					// TODO: PRINT
 
 				}
@@ -286,13 +288,13 @@ public class Run
 				tikra12 = result20;
 				smas12 = tikra12 * tav.get(2).getTax();
 				tikra13 = sh20 - tikra12;
-				smas13 = tikra13 * 0.2;
+				smas13 = tikra13 * SHEVA_20;
 				// TODO: PRINT
 			}
 		}
 		else if (result > tav.get(2).getMax()) {
 			tikra13 = sh20;
-			smas13 = tikra13 * 0.2;
+			smas13 = tikra13 * SHEVA_20;
 			// TODO: PRINT
 		}
 
@@ -356,14 +358,14 @@ public class Run
 
 					if (result25 <= (tav.get(3).getMax() - tav.get(2).getMax())) {
 						tikra113 = result25;
-						smas113 = tikra113 * 0.2;
+						smas113 = tikra113 * SHEVA_20;
 						// TODO: PRINT
 					}
 					else {
 						tikra113 = tav.get(3).getMax() - tav.get(2).getMax();
-						smas113 = tikra113 * 0.2;
+						smas113 = tikra113 * SHEVA_20;
 						tikra114 = sh25 - (tikra111 + tikra112 + tikra113);
-						smas114 = tikra114 * 0.25;
+						smas114 = tikra114 * SHEVA_25;
 						// TODO: PRINT
 					}
 				}
@@ -383,14 +385,14 @@ public class Run
 
 				if (result25 <= (tav.get(3).getMax() - tav.get(2).getMax())) {
 					tikra113 = result25;
-					smas113 = tikra113 * 0.2;
+					smas113 = tikra113 * SHEVA_20;
 					// TODO: PRINT
 				}
 				else {
 					tikra113 = tav.get(3).getMax() - tav.get(2).getMax();
-					smas113 = tikra113 * 0.2;
+					smas113 = tikra113 * SHEVA_20;
 					tikra114 = sh25 - (tikra112 + tikra113);
-					smas114 = tikra114 * 0.25;
+					smas114 = tikra114 * SHEVA_25;
 					// TODO: PRINT
 				}
 			}
@@ -399,20 +401,20 @@ public class Run
 			result25 = tav.get(3).getMax() - result;
 			if (sh25 <= result25) {
 				tikra113 = sh25;
-				smas113 = tikra113 * 0.2;
+				smas113 = tikra113 * SHEVA_20;
 				// TODO: PRINT
 			}
 			else {
 				tikra113 = result25;
-				smas113 = tikra113 * 0.2;
+				smas113 = tikra113 * SHEVA_20;
 				tikra114 = sh25 - tikra113;
-				smas114 = tikra114 * 0.25;
+				smas114 = tikra114 * SHEVA_25;
 				// TODO: PRINT
 			}
 		}
 		else if (result > tav.get(3).getMax()) {
 			tikra114 = sh25;
-			smas114 = tikra114 * 0.25;
+			smas114 = tikra114 * SHEVA_25;
 			// TODO: PRINT
 		}
 
